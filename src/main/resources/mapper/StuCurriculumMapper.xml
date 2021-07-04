@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.experiment2.dao.StuCurriculumMapper">
+  <resultMap id="BaseResultMap" type="com.example.experiment2.bean.StuCurriculum">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_nature" jdbcType="VARCHAR" property="courseNature" />
+    <result column="course_selected_ID" jdbcType="VARCHAR" property="courseSelectedId" />
+    <result column="course_selected_stu" jdbcType="VARCHAR" property="courseSelectedStu" />
+    <result column="course_status" jdbcType="VARCHAR" property="courseStatus" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, course_id, course_name, course_nature, course_selected_ID, course_selected_stu, 
+    course_status, grade
+  </sql>
+  <select id="selectByExample" parameterType="com.example.experiment2.bean.StuCurriculumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stu_curriculum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stu_curriculum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stu_curriculum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.experiment2.bean.StuCurriculumExample">
+    delete from stu_curriculum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.experiment2.bean.StuCurriculum">
+    insert into stu_curriculum (id, course_id, course_name, 
+      course_nature, course_selected_ID, course_selected_stu, 
+      course_status, grade)
+    values (#{id,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, 
+      #{courseNature,jdbcType=VARCHAR}, #{courseSelectedId,jdbcType=VARCHAR}, #{courseSelectedStu,jdbcType=VARCHAR}, 
+      #{courseStatus,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.experiment2.bean.StuCurriculum">
+    insert into stu_curriculum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="courseNature != null">
+        course_nature,
+      </if>
+      <if test="courseSelectedId != null">
+        course_selected_ID,
+      </if>
+      <if test="courseSelectedStu != null">
+        course_selected_stu,
+      </if>
+      <if test="courseStatus != null">
+        course_status,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNature != null">
+        #{courseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSelectedId != null">
+        #{courseSelectedId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSelectedStu != null">
+        #{courseSelectedStu,jdbcType=VARCHAR},
+      </if>
+      <if test="courseStatus != null">
+        #{courseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.experiment2.bean.StuCurriculumExample" resultType="java.lang.Long">
+    select count(*) from stu_curriculum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stu_curriculum
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseName != null">
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseNature != null">
+        course_nature = #{record.courseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseSelectedId != null">
+        course_selected_ID = #{record.courseSelectedId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseSelectedStu != null">
+        course_selected_stu = #{record.courseSelectedStu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseStatus != null">
+        course_status = #{record.courseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stu_curriculum
+    set id = #{record.id,jdbcType=INTEGER},
+      course_id = #{record.courseId,jdbcType=INTEGER},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      course_nature = #{record.courseNature,jdbcType=VARCHAR},
+      course_selected_ID = #{record.courseSelectedId,jdbcType=VARCHAR},
+      course_selected_stu = #{record.courseSelectedStu,jdbcType=VARCHAR},
+      course_status = #{record.courseStatus,jdbcType=VARCHAR},
+      grade = #{record.grade,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.experiment2.bean.StuCurriculum">
+    update stu_curriculum
+    <set>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNature != null">
+        course_nature = #{courseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSelectedId != null">
+        course_selected_ID = #{courseSelectedId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSelectedStu != null">
+        course_selected_stu = #{courseSelectedStu,jdbcType=VARCHAR},
+      </if>
+      <if test="courseStatus != null">
+        course_status = #{courseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.experiment2.bean.StuCurriculum">
+    update stu_curriculum
+    set course_id = #{courseId,jdbcType=INTEGER},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      course_nature = #{courseNature,jdbcType=VARCHAR},
+      course_selected_ID = #{courseSelectedId,jdbcType=VARCHAR},
+      course_selected_stu = #{courseSelectedStu,jdbcType=VARCHAR},
+      course_status = #{courseStatus,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateCourseGradeIsNull" parameterType="com.example.experiment2.bean.StuCurriculum">
+    update stu_curriculum
+    set course_status = "未修",
+        grade = null
+    where course_name = #{param1} and course_selected_ID = #{param2}
+  </update>
+</mapper>

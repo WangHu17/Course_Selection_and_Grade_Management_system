@@ -1,0 +1,25 @@
+#trainingProgramsIndex,#stuCurriculumIndex,#gradeViewIndex
+,#teachingManagementIndex,#gradesManagementIndex,#coursesTaughtIndex
+,#trainingProgramsIndex,#gradesManagementIndex{
+    display: none;
+}
+.show{
+    display: block;
+}
+#search_form{
+    float: right!important;
+    margin-top: 0;
+}
+#search_form input{
+    width: 120px;
+}
+#course_ul{
+    margin-top: 10px;
+}
+#selected_major_and_class{
+    margin-top: 10px;
+    display: none;
+}
+.hide_this{
+    display: none;
+}
