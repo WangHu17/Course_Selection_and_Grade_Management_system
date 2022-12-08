@@ -5,7 +5,6 @@
 <generatorConfiguration>
 
 	<context id="DB2Tables" targetRuntime="MyBatis3">
-
 		<!--配置是否生成注释-->
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
