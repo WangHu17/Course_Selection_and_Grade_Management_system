@@ -3,12 +3,12 @@
 <head>
     <title>登录</title>
     <%
-        pageContext.setAttribute("APP_PATH",request.getContextPath());
+        pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
     <link rel="shortcut icon" href="${APP_PATH}/static/fonts/icon.png">
-    <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/animate-custom.css" />
+    <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/css/animate-custom.css"/>
     <script src="${APP_PATH}/static/js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -26,7 +26,7 @@
     </header>
 
     <section>
-        <div id="container_demo" >
+        <div id="container_demo">
             <a class="hiddenanchor" id="to_stu_login"></a>
             <a class="hiddenanchor" id="to_tea_login"></a>
             <a class="hiddenanchor" id="to_sec_login"></a>
@@ -36,12 +36,13 @@
                     <form autocomplete="on">
                         <h1>Log in</h1>
                         <p>
-                            <label for="stu_ID" class="uname" data-icon="u" > Your user ID </label>
+                            <label for="stu_ID" class="uname" data-icon="u"> Your user ID </label>
                             <input id="stu_ID" name="id" required="required" type="text" placeholder="my userID"/>
                         </p>
                         <p>
                             <label for="stu_password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="stu_password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                            <input id="stu_password" name="password" required="required" type="password"
+                                   placeholder="eg. X8df!90EO"/>
                         </p>
                         <p class="login button">
                             <input type="button" value="Login" id="stu_login_btn"/>
@@ -56,12 +57,13 @@
                     <form autocomplete="on">
                         <h1>Log in</h1>
                         <p>
-                            <label for="tea_ID" class="uname" data-icon="u" > Your user ID </label>
+                            <label for="tea_ID" class="uname" data-icon="u"> Your user ID </label>
                             <input id="tea_ID" name="id" required="required" type="text" placeholder="my userID"/>
                         </p>
                         <p>
                             <label for="tea_password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="tea_password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                            <input id="tea_password" name="password" required="required" type="password"
+                                   placeholder="eg. X8df!90EO"/>
                         </p>
                         <p class="login button">
                             <input type="button" value="Login" id="tea_login_btn"/>
@@ -76,12 +78,13 @@
                     <form autocomplete="on">
                         <h1>Log in</h1>
                         <p>
-                            <label for="sec_ID" class="uname" data-icon="u" > Your user ID </label>
+                            <label for="sec_ID" class="uname" data-icon="u"> Your user ID </label>
                             <input id="sec_ID" name="id" required="required" type="text" placeholder="my userID"/>
                         </p>
                         <p>
                             <label for="sec_password" class="youpasswd" data-icon="p"> Your password </label>
-                            <input id="sec_password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                            <input id="sec_password" name="password" required="required" type="password"
+                                   placeholder="eg. X8df!90EO"/>
                         </p>
                         <p class="login button">
                             <input type="button" value="Login" id="sec_login_btn"/>
@@ -98,74 +101,78 @@
 
 </div>
 <script>
+
     //角色切换按钮样式
-    $(".codrops-demos a").click(function (){
+    $(".codrops-demos a").click(function () {
         $(".codrops-demos a").not(this).removeClass("current-demo");
         $(this).addClass("current-demo");
     });
 
     //学生登录
-    $("#stu_login_btn").click(function (){
+    $("#stu_login_btn").click(function () {
         let userID = $("#stu_ID").val();
         let password = $("#stu_password").val();
-        if(userID!=(null||"")&&password!=(null||"")){
+        if (userID !== "" && password !== "") {
             $.ajax({
                 url: "${APP_PATH}/stu",
                 type: "POST",
                 data: $("#stu_login form").serialize(),
-                success: function (result){
-                    if(result.code==100){
+                success: function (result) {
+                    if (result.code === 100) {
                         window.location.href = "${APP_PATH}/stuIndex";
-                    }else {
-                        alert("登录失败，"+result.extend.msg+"！");
+                    } else {
+                        alert("登录失败，" + result.extend.msg + "！");
                     }
                 }
             });
-        }else{
+        } else {
             alert("请填写用户名和密码！");
         }
     });
 
     //教师登录按钮点击事件
-    $("#tea_login_btn").click(function (){
+    $("#tea_login_btn").click(function () {
         let userID = $("#tea_ID").val();
         let password = $("#tea_password").val();
-        if(userID!=(null||"")&&password!=(null||"")){
+        if (userID !== "" && password !== "") {
             $.ajax({
                 url: "${APP_PATH}/tea",
                 type: "POST",
                 data: $("#tea_login form").serialize(),
-                success: function (result){
-                    if(result.code==100){
+                success: function (result) {
+                    if (result.code === 100) {
                         window.location.href = "${APP_PATH}/teaIndex";
-                    }else {
-                        alert("登录失败，"+result.extend.msg+"！");
+                    } else {
+                        alert("登录失败，" + result.extend.msg + "！");
                     }
+                },
+                error:function(){
+                    console.log("error")
                 }
             });
-        }else{
+        } else {
             alert("请填写用户名和密码！");
         }
     });
 
     //教秘登录按钮点击事件
-    $("#sec_login_btn").click(function (){
+    $("#sec_login_btn").click(function () {
         let userID = $("#sec_ID").val();
         let password = $("#sec_password").val();
-        if(userID!=(null||"")&&password!=(null||"")){
+        if (userID !== "" && password !== "") {
             $.ajax({
                 url: "${APP_PATH}/sec",
                 type: "POST",
                 data: $("#sec_login form").serialize(),
-                success: function (result){
-                    if(result.code==100){
+                success: function (result) {
+                    if (result.code === 100) {
                         window.location.href = "${APP_PATH}/secIndex";
-                    }else {
-                        alert("登录失败，"+result.extend.msg+"！");
+                    } else {
+                        alert("登录失败，" + result.extend.msg + "！");
                     }
                 }
             });
-        }else{
+        } else {
             alert("请填写用户名和密码！");
         }
     });

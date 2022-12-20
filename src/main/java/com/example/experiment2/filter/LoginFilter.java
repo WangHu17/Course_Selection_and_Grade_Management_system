@@ -11,21 +11,21 @@ public class LoginFilter implements Filter {
         Object user = req.getSession().getAttribute("user");
         String spath = req.getServletPath();
         //不需要过滤的url
-        String[] urls = {"/login","/json",".js",".css",".ico",".jpg",".png",".woff",".ttf"};
+        String[] urls = {"/stu", "/tea", "/sec", "/logout", "/login", "/json", ".js", ".css", ".ico", ".jpg", ".png", ".woff", ".ttf"};
         boolean flag = true;
         for (String str : urls) {
             if (spath.indexOf(str) != -1) {
-                flag =false;
+                flag = false;
                 break;
             }
         }
-        if(flag){
-            if(user==null){
-                req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(servletRequest,servletResponse);
-            }else {
+        if (flag) {
+            if (user == null) {
+                req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(servletRequest, servletResponse);
+            } else {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
-        } else{
+        } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
